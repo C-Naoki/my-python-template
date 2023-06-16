@@ -1,6 +1,8 @@
 # Python Template for Project
 [![Python 3.10](https://img.shields.io/badge/Python-3.10-green.svg)](https://www.python.org/downloads/release/python-390/)
 [![Poetry](https://img.shields.io/badge/Poetry-1.5.1-blue.svg)](https://python-poetry.org/)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 This repository is a my python template to help you get started quickly on a new project.
 
@@ -18,19 +20,25 @@ Follow these steps to start a new project based on this template:
     rm -rf .git
     ```
 
-3. **Initialize a New Repository**: Then, initialize a new repository in the new directory:
+3. **Setting Up The Local Development Environment**: Install the required python version, set the local python version, create and use a new poetry environment, and install the project dependencies. You can do this with the provided `Makefile` using the following command:
+
+    ```bash
+    make install
+    ```
+
+4. **Initialize a New Repository**: Then, initialize a new repository in the new directory:
 
     ```bash
     git init
     ```
 
-4. **Set the Remote of the New Repository**: Set your new GitHub repository as the remote for your new project:
+5. **Set the Remote of the New Repository**: Set your new GitHub repository as the remote for your new project:
 
     ```bash
     git remote add origin <url-of-your-new-repository>
     ```
 
-5. **Push to the New Repository**: Stage all files, commit them, and push them to your new repository:
+6. **Push to the New Repository**: Stage all files, commit them, and push them to your new repository:
 
     ```bash
     git add .
