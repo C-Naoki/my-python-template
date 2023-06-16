@@ -5,9 +5,9 @@ install:
 	else \
 		echo "Python 3.10 is already installed."; \
 	fi
-	# poetry env use 3.10
-	# poetry install
-	# poetry run pre-commit install
+	poetry env use 3.10
+	poetry install
+	poetry run pre-commit install
 
 .PHONY: run
 run:
