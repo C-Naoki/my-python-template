@@ -5,6 +5,15 @@ description = ""
 authors = ["naoki <74347818+C-naoki@users.noreply.github.com>"]
 readme = "README.md"
 
+[tool.poetry.group.dev.dependencies]
+flake8-isort = "^6.0.0"
+flake8-bugbear = "^23.6.5"
+flake8-builtins = "^2.1.0"
+flake8-eradicate = "^1.5.0"
+flake8-pytest-style = "^1.7.2"
+flake8-unused-arguments = "^0.0.13"
+pyproject-flake8 = "^6.0.0.post1"
+
 [project]
 name = "my-python-templete"
 version = "0.1.0"
@@ -29,13 +38,13 @@ taskipy = "^1.10.1"
 black = "^22.3.0"
 mypy = "^0.942"
 isort = "^5.10.1"
-flake8 = "^4.0.1"
-flake8-isort = "^4.1.1"
-flake8-bugbear = "^22.3.23"
-flake8-builtins = "^1.5.3"
+flake8 = "^6.0.0"
+flake8-isort = "^6.0.0"
+flake8-bugbear = "^23.6.5"
+flake8-builtins = "^2.1.0"
 flake8-eradicate = "^1.2.0"
 flake8-pytest-style = "^1.6.0"
-flake8-unused-arguments = "^0.0.9"
+flake8-unused-arguments = "^0.0.13"
 pep8-naming = "^0.12.1"
 pytest = "^7.1.1"
 pytest-mock = "^3.7.0"
@@ -43,6 +52,21 @@ pytest-cov = "^3.0.0"
 Sphinx = "^4.5.0"
 sphinx-rtd-theme = "^1.0.0"
 sphinx-pyproject = "^0.1.0"
+
+[tool.flake8]
+extend-ignore = "E203, W503"
+exclude = [".venv", ".git", "__pycache__",]
+max-complexity = 10
+
+[tool.mypy]
+show_error_context = true
+show_column_numbers = true
+ignore_missing_imports = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+warn_return_any = true
+warn_unused_ignores = true
+warn_redundant_casts = true
 
 [tool.black]
 line-length = 79
