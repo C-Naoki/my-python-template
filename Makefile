@@ -1,5 +1,13 @@
 .PHONY: install
 install:
+	@if ! command -v pyenv &> /dev/null; then \
+		echo "Error: pyenv is not installed. Visit https://github.com/pyenv/pyenv#installation for installation instructions."; \
+		exit 1; \
+	fi
+	@if ! command -v poetry &> /dev/null; then \
+		echo "Error: poetry is not installed. Visit https://python-poetry.org/docs/#installation for installation instructions."; \
+		exit 1; \
+	fi
 	@if [ -z "$$(pyenv versions | grep '3\.10\..*')" ]; then \
 		pyenv install 3.10; \
 	else \
