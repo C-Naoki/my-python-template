@@ -54,7 +54,7 @@ sphinx-rtd-theme = "^1.0.0"
 sphinx-pyproject = "^0.1.0"
 
 [tool.flake8]
-extend-ignore = "E203, W503"
+extend-ignore = "E203, E741, W503, N806, N802"
 exclude = [".venv", ".git", "__pycache__",]
 max-complexity = 10
 
