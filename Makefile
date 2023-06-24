@@ -16,9 +16,11 @@ install:
 	poetry env use 3.10
 	poetry install
 	poetry run pre-commit install
-	@SITE_PACKAGES_DIR=$$(python -c "import sys, os; print([path for path in sys.path if '.venv' in path and 'site-packages' in path][0])"); \
-	PROJECT_ROOT=$$(echo $${SITE_PACKAGES_DIR} | rev | cut -d'/' -f5- | rev); \
-	echo $${PROJECT_ROOT} > $${SITE_PACKAGES_DIR}/tsuumo.pth
+	@VENV_PATH=$$(poetry env info --path); \
+	SITE_PACKAGES_DIR="$${VENV_PATH}/lib/python3.10/site-packages"; \
+	PROJECT_ROOT=$$(echo $${VENV_PATH} | rev | cut -d'/' -f2- | rev); \
+	VENV_NAME=$$(basename `dirname $${VENV_PATH}`); \
+	echo $${PROJECT_ROOT} > $${SITE_PACKAGES_DIR}/$${VENV_NAME}.pth
 
 .PHONY: run
 run:
