@@ -30,6 +30,7 @@ repos:
         - flake8-bugbear
         - flake8-builtins
         - flake8-eradicate
+        - flake8-pyproject
         - flake8-pytest-style
         - flake8-unused-arguments
         - pep8-naming
