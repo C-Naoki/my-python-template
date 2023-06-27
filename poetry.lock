@@ -952,6 +952,23 @@ files = [
 flake8 = "*"
 
 [[package]]
+name = "flake8-pyproject"
+version = "1.2.3"
+description = "Flake8 plug-in loading the configuration from pyproject.toml"
+optional = false
+python-versions = ">= 3.6"
+files = [
+    {file = "flake8_pyproject-1.2.3-py3-none-any.whl", hash = "sha256:6249fe53545205af5e76837644dc80b4c10037e73a0e5db87ff562d75fb5bd4a"},
+]
+
+[package.dependencies]
+Flake8 = ">=5"
+TOMLi = {version = "*", markers = "python_version < \"3.11\""}
+
+[package.extras]
+dev = ["pyTest", "pyTest-cov"]
+
+[[package]]
 name = "flake8-pytest-style"
 version = "1.7.2"
 description = "A flake8 plugin checking common style issues or inconsistencies with pytest-based tests."
@@ -2529,21 +2546,6 @@ files = [
 diagrams = ["jinja2", "railroad-diagrams"]
 
 [[package]]
-name = "pyproject-flake8"
-version = "6.0.0.post1"
-description = "pyproject-flake8 (`pflake8`), a monkey patching wrapper to connect flake8 with pyproject.toml configuration"
-optional = false
-python-versions = ">=3.8.1"
-files = [
-    {file = "pyproject-flake8-6.0.0.post1.tar.gz", hash = "sha256:d43421caca0ef8a672874405fe63c722b0333e3c22c41648c6df60f21bab2b6b"},
-    {file = "pyproject_flake8-6.0.0.post1-py3-none-any.whl", hash = "sha256:bdc7ca9b967b9724983903489b8943b72c668178fb69f03e8774ec74f6a13782"},
-]
-
-[package.dependencies]
-flake8 = "6.0.0"
-tomli = {version = "*", markers = "python_version < \"3.11\""}
-
-[[package]]
 name = "pyrsistent"
 version = "0.19.3"
 description = "Persistent/Functional/Immutable data structures"
@@ -3669,4 +3671,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.11"
-content-hash = "3689994e48b38883983b8516f0791fb6dadfaedb180a1fb1c0ba5ef694d6428c"
+content-hash = "26e6ec9042172446ee8c61e5248e82f3a216d34e5288dff4de31a3d365686cdf"
