@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from typing import Tuple
+from typing import Any, Tuple
 
 import numpy as np
 
@@ -14,9 +14,19 @@ class BaseModel(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def create_variables(self) -> Tuple[np.ndarray, np.ndarray]:
+    def create_variables(
+        self, *args: Any,  # noqa: U100
+        **kwargs: Any  # noqa: U100
+    ) -> Tuple[np.ndarray, np.ndarray]:
         """
         Create and return the explanatory and objective variables.
+
+        Parameters
+        ----------
+        *args: Any
+            Variable length argument list.
+        **kwargs: Any
+            Arbitrary keyword arguments.
 
         Returns
         -------
@@ -26,10 +36,17 @@ class BaseModel(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def fit(self) -> None:
+    def fit(self, *args: Any, **kwargs: Any) -> None:  # noqa: U100
         """
         Fit the model to the data. The specific fitting procedure should be
         implemented in the classes that inherit from this class.
+
+        Parameters
+        ----------
+        *args: Any
+            Variable length argument list.
+        **kwargs: Any
+            Arbitrary keyword arguments.
         """
         raise NotImplementedError
 
