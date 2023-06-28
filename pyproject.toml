@@ -36,7 +36,7 @@ pygithub = "^1.58.2"
 pre-commit = "^2.18.1"
 taskipy = "^1.10.1"
 black = "^22.3.0"
-mypy = "^0.942"
+mypy = "^0.990"
 isort = "^5.10.1"
 flake8 = "^6.0.0"
 flake8-isort = "^6.0.0"
@@ -54,7 +54,7 @@ sphinx-rtd-theme = "^1.0.0"
 sphinx-pyproject = "^0.1.0"
 
 [tool.flake8]
-extend-ignore = "E203, E741, W503, N806, N802"
+extend-ignore = "E203, E741, W503, N806, N802, N803"
 exclude = [".venv", ".git", "__pycache__",]
 max-complexity = 10
 
