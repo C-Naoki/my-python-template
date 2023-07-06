@@ -10,13 +10,13 @@ class BaseModel(metaclass=ABCMeta):
     All machine learning　models should inherit from this class
     and implement the abstract methods.
     """
+
     def __init__(self) -> None:
         raise NotImplementedError
 
     @abstractmethod
     def create_variables(
-        self, *args: Any,  # noqa: U100
-        **kwargs: Any  # noqa: U100
+        self, *args: Any, **kwargs: Any  # noqa: U100  # noqa: U100
     ) -> Tuple[np.ndarray, np.ndarray]:
         """
         Create and return the explanatory and objective variables.
@@ -69,9 +69,7 @@ class BaseModel(metaclass=ABCMeta):
 
     @abstractmethod
     def score(
-        self,
-        X: np.ndarray,   # noqa: U100
-        y_true: np.ndarray   # noqa: U100
+        self, X: np.ndarray, y_true: np.ndarray  # noqa: U100
     ) -> float:
         """
         Calculate the score of the model.

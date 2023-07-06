@@ -28,12 +28,13 @@ class GridSearch:
     is_heatmap : (bool, optional, default False)
         Determines whether to plot a heatmap for the scores.
     """
+
     def __init__(
-            self,
-            param_grid: dict[str, list],
-            verbose: bool = True,
-            is_heatmap: bool = False
-            ) -> None:
+        self,
+        param_grid: dict[str, list],
+        verbose: bool = True,
+        is_heatmap: bool = False,
+    ) -> None:
         self.param_grid = param_grid
         self.verbose = verbose
         self.is_heatmap = is_heatmap
@@ -68,19 +69,18 @@ class GridSearch:
         self.best_params: Optional[dict] = None
         if self.is_heatmap:
             self.score_grids = {
-                combination: np.zeros((
-                    len(self.param_grid[combination[0]]),
-                    len(self.param_grid[combination[1]])
-                ))
+                combination: np.zeros(
+                    (
+                        len(self.param_grid[combination[0]]),
+                        len(self.param_grid[combination[1]]),
+                    )
+                )
                 for combination in itertools.combinations(self.keys, 2)
             }
 
     def __train_and_evaluate(
-            self,
-            estimator: Type[BaseModel],
-            params: tuple,
-            variables: dict
-            ) -> None:
+        self, estimator: Type[BaseModel], params: tuple, variables: dict
+    ) -> None:
         """
         Train and evaluate the estimator given the parameters and variables.
 
@@ -96,8 +96,9 @@ class GridSearch:
         params_dict = dict(zip(self.keys, params))
         _estimator = estimator(**params_dict)
         X, y = _estimator.create_variables(**variables)
-        X_train, X_test, y_train, y_test =\
-            train_test_split(X, y, test_size=0.2, shuffle=False)
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y, test_size=0.2, shuffle=False
+        )
         _estimator.fit(X_train, y_train)
         score = _estimator.score(X_test, y_test)
 
@@ -120,10 +121,12 @@ class GridSearch:
         """
         for combination in itertools.combinations(self.keys, 2):
             self.score_grids[combination][
-                self.param_grid[combination[0]]
-                    .index(params_dict[combination[0]]),
-                self.param_grid[combination[1]]
-                    .index(params_dict[combination[1]])
+                self.param_grid[combination[0]].index(
+                    params_dict[combination[0]]
+                ),
+                self.param_grid[combination[1]].index(
+                    params_dict[combination[1]]
+                ),
             ] = score
 
     def __print_best(self) -> None:
@@ -141,13 +144,12 @@ class GridSearch:
         combinations = list(itertools.combinations(self.keys, 2))
         num_combinations = len(combinations)
         num_rows = int(math.sqrt(num_combinations))
-        num_cols = num_combinations // num_rows\
-            + (num_combinations % num_rows > 0)
+        num_cols = num_combinations // num_rows + (
+            num_combinations % num_rows > 0
+        )
 
         fig, axes = plt.subplots(
-            num_rows,
-            num_cols,
-            figsize=(5 * num_cols, 5 * num_rows)
+            num_rows, num_cols, figsize=(5 * num_cols, 5 * num_rows)
         )
         if num_rows == 1 and num_cols == 1:
             axes = np.array([axes])
@@ -162,11 +164,11 @@ class GridSearch:
                 annot=True,
                 xticklabels=self.param_grid[combination[1]],
                 yticklabels=self.param_grid[combination[0]],
-                ax=ax
+                ax=ax,
             )
             ax.set_xlabel(combination[1])
             ax.set_ylabel(combination[0])
 
-        fig.suptitle('Heatmaps of scores')
+        fig.suptitle("Heatmaps of scores")
         plt.tight_layout()
         plt.show()
