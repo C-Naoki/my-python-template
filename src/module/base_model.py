@@ -15,9 +15,7 @@ class BaseModel(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def create_variables(
-        self, *args: Any, **kwargs: Any  # noqa: U100  # noqa: U100
-    ) -> Tuple[np.ndarray, np.ndarray]:
+    def create_variables(self, *args: Any, **kwargs: Any) -> Tuple[np.ndarray, np.ndarray]:  # noqa: U100
         """
         Create and return the explanatory and objective variables.
 
@@ -68,9 +66,7 @@ class BaseModel(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def score(
-        self, X: np.ndarray, y_true: np.ndarray  # noqa: U100
-    ) -> float:
+    def score(self, X: np.ndarray, y_true: np.ndarray) -> float:  # noqa: U100
         """
         Calculate the score of the model.
 
