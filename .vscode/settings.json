@@ -1,25 +1,13 @@
 {
   "[python]": {
-    "editor.tabSize": 4,
+    "editor.defaultFormatter": "charliermarsh.ruff",  // Ruff: it is a fast linter for Python, written in Rust.
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true
-    }
+        "source.fixAll.ruff": "explicit",  //  Fix codes when saving
+        "source.organizeImports.ruff": "explicit",  //  Organize imports order when saving
+    },
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
   },
-  "python.analysis.extraPaths": [
-    "./src",
-    "${workspaceFolder}/.venv/lib/python3.10/site-packages",
-  ],
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
-  "python.linting.pylintEnabled": false,
-  "python.linting.flake8Enabled": true,
-  "python.linting.flake8Path": "${workspaceFolder}/.venv/bin/flake8",
-  "python.linting.mypyEnabled": true,
-  "python.linting.mypyPath": "${workspaceFolder}/.venv/bin/mypy",
-  "mypy.dmypyExecutable": "${workspaceFolder}/.venv/bin/dmypy",
-  "python.formatting.provider": "black",
-  "python.formatting.blackPath": "${workspaceFolder}/.venv/bin/black",
-  "isort.path": [
-    "${workspaceFolder}/.venv/bin/isort"
-  ],
   "autoDocstring.docstringFormat": "numpy"
 }
