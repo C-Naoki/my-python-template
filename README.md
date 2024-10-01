@@ -49,4 +49,4 @@ Follow these steps to start a new project based on this template:
 By following these steps, you can start a new project based on this starter set.
 
 ## License
-Licensed under the APLv2. See the LICENSE file for details.
+Licensed under the APLv2. See the [LICENSE](https://github.com/C-Naoki/my-python-template/blob/main/LICENSE) file for details.
