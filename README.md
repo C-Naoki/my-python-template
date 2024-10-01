@@ -47,3 +47,6 @@ Follow these steps to start a new project based on this template:
     ```
 
 By following these steps, you can start a new project based on this starter set.
+
+## License
+Licensed under the APLv2. See the LICENSE file for details.
