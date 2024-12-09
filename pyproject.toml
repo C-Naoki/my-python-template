@@ -28,7 +28,6 @@ tqdm = "^4.65.0"
 pygithub = "^1.58.2"
 
 [tool.poetry.dev-dependencies]
-pre-commit = "^2.18.1"
 taskipy = "^1.10.1"
 mypy = "^0.990"
 pep8-naming = "^0.12.1"
