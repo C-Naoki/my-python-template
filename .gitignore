@@ -170,3 +170,7 @@ docs/reports/*.out
 docs/reports/*.snm
 docs/reports/*.synctex.gz
 docs/reports/*.toc
+
+# results
+out/*
+nohup/*
