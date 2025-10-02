@@ -1,0 +1,95 @@
+\documentclass[aspectratio=169, dvipdfmx, hyperref={bookmarks=true}]{beamer}
+
+%%%%%% config %%%%%%
+\usetheme{Madrid}
+\title[Beamer]{Beamerのテスト}
+\subtitle{サブタイトル}
+\author[Name]{氏名}
+\institute[Affiliation]{所属}
+\date{\today}
+
+%%%%%% packages %%%%%%
+\usepackage{pxjahyper}
+\usepackage{bxdpx-beamer}
+\usepackage{minijs}
+
+%%%%%% babel %%%%%%
+\uselanguage{japanese}
+\languagepath{japanese}
+\deftranslation[to=japanese]{Theorem}{定理}
+\deftranslation[to=japanese]{Lemma}{補題}
+\deftranslation[to=japanese]{Example}{例}
+\deftranslation[to=japanese]{Examples}{例}
+\deftranslation[to=japanese]{Definition}{定義}
+\deftranslation[to=japanese]{Definitions}{定義}
+\deftranslation[to=japanese]{Problem}{問題}
+\deftranslation[to=japanese]{Solution}{解}
+\deftranslation[to=japanese]{Fact}{事実}
+\deftranslation[to=japanese]{Proof}{証明}
+
+%%%%%% fonts %%%%%%
+\usefonttheme{professionalfonts}
+\usepackage{txfonts}  % TXフォント
+\renewcommand{\kanjifamilydefault}{\gtdefault}  % 和文用
+\renewcommand{\familydefault}{\sfdefault}  % 英文をサンセリフ体に
+%\usepackage[T1]{fontenc}%8bit フォント
+%\usepackage{textcomp}%欧文フォントの追加
+%\usepackage[utf8]{inputenc}%文字コードをUTF-8
+%\usepackage{otf}%otfパッケージ
+%\usepackage{lxfonts}%数式・英文ローマン体を Lxfont にする
+%\usepackage{bm}%数式太字
+
+\begin{document}
+
+\begin{frame}
+\maketitle
+\end{frame}
+
+\section{節}
+
+\begin{frame}{目次}
+  \tableofcontents
+\end{frame}
+
+\begin{frame}
+\frametitle{1枚目のスライドのタイトル}
+テスト テスト テスト テスト テスト テスト テスト テスト
+
+テスト テスト テスト テスト テスト テスト
+\end{frame}
+
+\begin{frame}
+\frametitle{2枚目のスライドのタイトル}
+  % 通常のブロック
+  \begin{block}{block}
+      simple block
+    \end{block}
+    % 注意のブロック
+    \begin{alertblock}{alertblock}
+      \begin{itemize}
+        \item これは注意です
+        \item とても重要です
+      \end{itemize}
+      \begin{itemize}
+        \item これは注意です
+        \item とても重要です
+      \end{itemize}
+    \end{alertblock}
+    % Example ブロック
+    \begin{exampleblock}{exampleblock}
+      exampleblock
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle{3枚目のスライドのタイトル}
+  \begin{theorem}[定理の名前]
+    これは定理です。
+    成立して嬉しいね。
+    \begin{equation}
+      a^2 + b^2 = c^2
+    \end{equation}
+  \end{theorem}
+\end{frame}
+
+\end{document}
