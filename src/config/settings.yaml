@@ -26,12 +26,10 @@ io:
   root_out_dir: out/
   tag: null
   # preprocessing of input data
-  logarithm: False
-  zscore: True
-  minmax_scale: False
-  normalize: False
-  whitenoise: 0
   moving_average: 1
+  logarithm: False
+  scaling_kind: null  # [none, zscore, minmax_scale, normalize]
+  whitenoise: 0
 
 seed: 42
 use_gpu: False
