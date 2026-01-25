@@ -34,7 +34,7 @@ poetry_setup:
 	@test -n "$(PYTHON_PREFIX)" || (echo "[ERROR] Failed to obtain the prefix for $(PYTHON_VERSION) from pyenv."; exit 1)
 	@test -x "$(PYTHON_BIN)"   || (echo "[ERROR] $(PYTHON_BIN) not found (verify that 'pyenv install $(PYTHON_VERSION)' has been run)."; exit 1)
 	poetry env use "$(PYTHON_BIN)"
-	[ -f poetry.lock ] && rm poetry.lock
+	rm -f poetry.lock
 	poetry lock --no-cache
 	poetry install
 
