@@ -2,14 +2,41 @@ import random
 import shutil
 import textwrap
 from dataclasses import fields, is_dataclass
-from typing import Any, Optional
+from typing import Any, List, Literal, Optional, Tuple
 
 import numpy as np
+import pandas as pd
+from tabulate import tabulate
 
 BOLD = '\033[1m'
 BLACK = '\033[30m'
 MAG_BG = '\033[45m'
 END = '\033[0m'
+
+
+def center(x: np.ndarray) -> np.ndarray:
+    return x - np.mean(x, axis=0, keepdims=True)
+
+
+def vech(mat: np.ndarray, tri: Tuple[np.ndarray, np.ndarray]) -> np.ndarray:
+    return mat[tri]
+
+
+def invech(vec: np.ndarray, d: int, tri: Tuple[np.ndarray, np.ndarray]) -> np.ndarray:
+    out = np.zeros((d, d), dtype=vec.dtype)
+    out[tri] = vec
+    out[(tri[1], tri[0])] = vec
+    return out
+
+
+def make_spd(mat: np.ndarray, min_eig: float = 1e-8, ridge: float = 1e-10) -> np.ndarray:
+    a = 0.5 * (mat + mat.T)
+    w, v = np.linalg.eigh(a)
+    w = np.clip(w, min_eig, None)
+    a = (v * w) @ v.T
+    if ridge > 0.0:
+        a = a + ridge * np.eye(a.shape[0], dtype=a.dtype)
+    return a
 
 
 def cprint(element, **kwargs):
@@ -136,3 +163,89 @@ def format_config_box(
 
 def print_cfg(obj: dict, **kwargs) -> None:
     print(format_config_box(obj, **kwargs))
+
+
+def tabulate_wide(
+    wide: pd.DataFrame,
+    value_name: str = 'values',
+    index_name: Optional[str] = None,
+    style: Literal['multirow', 'flatten', 'long'] = 'multirow',
+    sep: str = ' / ',
+    dropna_values: bool = False,
+    tablefmt: str = 'psql',
+    floatfmt: str = 'g',
+) -> str:
+    idx_name = index_name if index_name is not None else (wide.index.name or 'time')
+
+    # --- long style ---
+    if style == 'long':
+        if not isinstance(wide.columns, pd.MultiIndex):
+            # Works with single-level columns: Treat column names as a single level
+            cols = [str(c) for c in wide.columns]
+            df = wide.copy()
+            df.columns = pd.MultiIndex.from_arrays([cols], names=['col'])
+        else:
+            df = wide
+
+        levels = list(range(df.columns.nlevels))
+        try:
+            s = df.stack(level=levels, future_stack=True)
+            long = s.rename(value_name).reset_index()
+            if dropna_values:
+                long = long.dropna(subset=[value_name])
+        except TypeError:
+            s = df.stack(level=levels, dropna=dropna_values)
+            long = s.rename(value_name).reset_index()
+
+        long = long.rename(columns={long.columns[0]: idx_name})
+        # Rearrange columns into [index] + column levels + [value]
+        col_level_names = [nm if nm is not None else f'level_{i}' for i, nm in enumerate(df.columns.names)]
+        out = long[[idx_name] + col_level_names + [value_name]]
+        return tabulate(out, headers='keys', tablefmt=tablefmt, showindex=False, floatfmt=floatfmt)
+
+    # --- flatten style ---
+    if style == 'flatten':
+        out = wide.copy()
+        if isinstance(out.columns, pd.MultiIndex):
+            out.columns = pd.Index(
+                [sep.join(map(str, tup)) for tup in out.columns.to_flat_index()],
+                dtype='object',
+            )
+        else:
+            out.columns = out.columns.map(str)
+        return tabulate(out, headers='keys', tablefmt=tablefmt, showindex=True, floatfmt=floatfmt)
+
+    # --- multirow style ---
+    if not isinstance(wide.columns, pd.MultiIndex):
+        # Works with single-level columns: Treat column names as a single level
+        return tabulate(wide, headers='keys', tablefmt=tablefmt, showindex=True, floatfmt=floatfmt)
+
+    nlv = wide.columns.nlevels
+    header_rows: List[List[str]] = []
+    # Create header rows for each level
+    for level in range(nlv):
+        row = []
+        row.append(idx_name if level == 0 else '')  # index column
+        for col in wide.columns:
+            row.append(str(col[level]))
+        header_rows.append(row)
+
+    # Data body (index values + each column value)
+    body_rows: List[List[str]] = []
+    for idx, rowvals in wide.iterrows():
+        row = [str(idx)]
+        # rowvals is 1D (corresponding to column MultiIndex)
+        for v in rowvals:
+            if pd.isna(v):
+                row.append('nan')
+            else:
+                if isinstance(v, (float, np.floating)):
+                    row.append(('{:' + floatfmt + '}').format(v))
+                else:
+                    row.append(str(v))
+        body_rows.append(row)
+
+    # Concatenate all and render as "header-less table"
+    table = header_rows + body_rows
+    # Clear column headers and use the created header_rows as actual data
+    return tabulate(table, headers=[], tablefmt=tablefmt, showindex=False)
