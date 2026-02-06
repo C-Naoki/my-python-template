@@ -9,7 +9,7 @@
 
 [![Python 3.9](https://img.shields.io/badge/Python-3.9-blue.svg)](https://www.python.org/downloads/release/python-3915/)
 [![Pyenv](https://img.shields.io/badge/Pyenv-2.6.7-yellow.svg)](https://github.com/pyenv/pyenv#installation)
-[![Poetry](https://img.shields.io/badge/poetry-2.1.4-299bd7?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAASCAYAAABrXO8xAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJJSURBVHgBfZLPa1NBEMe/s7tNXoxW1KJQKaUHkXhQvHgW6UHQQ09CBS/6V3hKc/AP8CqCrUcpmop3Cx48eDB4yEECjVQrlZb80CRN8t6OM/teagVxYZi38+Yz853dJbzoMV3MM8cJUcLMSUKIE8AzQ2PieZzFxEJOHMOgMQQ+dUgSAckNXhapU/NMhDSWLs1B24A8sO1xrN4NECkcAC9ASkiIJc6k5TRiUDPhnyMMdhKc+Zx19l6SgyeW76BEONY9exVQMzKExGKwwPsCzza7KGSSWRWEQhyEaDXp6ZHEr416ygbiKYOd7TEWvvcQIeusHYMJGhTwF9y7sGnSwaWyFAiyoxzqW0PM/RjghPxF2pWReAowTEXnDh0xgcLs8l2YQmOrj3N7ByiqEoH0cARs4u78WgAVkoEDIDoOi3AkcLOHU60RIg5wC4ZuTC7FaHKQm8Hq1fQuSOBvX/sodmNJSB5geaF5CPIkUeecdMxieoRO5jz9bheL6/tXjrwCyX/UYBUcjCaWHljx1xiX6z9xEjkYAzbGVnB8pvLmyXm9ep+W8CmsSHQQY77Zx1zboxAV0w7ybMhQmfqdmmw3nEp1I0Z+FGO6M8LZdoyZnuzzBdjISicKRnpxzI9fPb+0oYXsNdyi+d3h9bm9MWYHFtPeIZfLwzmFDKy1ai3p+PDls1Llz4yyFpferxjnyjJDSEy9CaCx5m2cJPerq6Xm34eTrZt3PqxYO1XOwDYZrFlH1fWnpU38Y9HRze3lj0vOujZcXKuuXm3jP+s3KbZVra7y2EAAAAAASUVORK5CYII=)](https://python-poetry.org/)
+[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://docs.astral.sh/ruff/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Docs](https://img.shields.io/badge/%F0%9F%93%9A%20docs-Zenn-3ea8ff.svg)](https://zenn.dev/naoki0103/articles/my-python-template)
@@ -17,10 +17,10 @@
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 </div>
 
-This repository is a comprehensive Python template designed to accelerate your research and development projects. It provides a well-structured foundation with modern Python tooling, including Poetry for dependency management and Pyenv for version management. The template comes pre-configured with essential data science libraries, automated environment setup, and practical scripts to help you focus on your core work rather than project setup.
+This repository is a comprehensive Python template designed to accelerate your research and development projects. It provides a well-structured foundation with modern Python tooling, including uv for dependency management and Pyenv for version management. The template comes pre-configured with essential data science libraries, automated environment setup, and practical scripts to help you focus on your core work rather than project setup.
 
 ## 📘 Usage
-Just click [`THIS BUTTON`](repo-template-action) or top-right green button to create a copy of this repository on your GitHub account.
+Just click [`THIS BUTTON`](https://github.com/C-Naoki/my-python-template/generate) or top-right green button to create a copy of this repository on your GitHub account.
 
 ### Main Commands
 I introduce some useful commands below.
@@ -30,7 +30,7 @@ I introduce some useful commands below.
     make install
     ```
     - ⚠️ **You need to execute this command before running other commands.**
-    - This command will create a virtual environment using `pyenv` and install the dependencies using `poetry`. See the [`Makefile`](Makefile) for more details.
+    - This command will create a virtual environment using `pyenv` and install the dependencies using `uv`. See the [`Makefile`](Makefile) for more details.
     - Some key packages (`numpy`, `pandas`, `scikit-learn`, etc.) are automatically installed by this command. See the [`pyproject.toml`](pyproject.toml) for more details and adjust them as needed.
 
 -  Run the quick demo
@@ -48,7 +48,7 @@ I introduce some useful commands below.
     ```bash
     make freeze
     ```
-    - This is useful when you want to use your project on an environment that does not support `poetry`.
+    - This is useful when you want to use your project on an environment that does not support `uv`.
 
 ## 🌳 Directory Structure
 The main directories and files are as follows:
@@ -60,13 +60,10 @@ The main directories and files are as follows:
 - `tests/`: Unit tests and test cases for the project.
 
 <details>
-<summary>&thinsp;See details (Last updated on Oct 2, 2025)</summary>
+<summary>&thinsp;See details (Last updated on Feb 6, 2026)</summary>
 
 ```bash
 .
-├── LICENSE
-├── Makefile
-├── README.md
 ├── bin
 │   ├── add_pth.sh
 │   ├── demo.sh
@@ -80,13 +77,19 @@ The main directories and files are as follows:
 │   │   └── memo.tex
 │   └── source
 │       └── conf.py
+├── LICENSE
+├── Makefile
 ├── notebooks
+│   ├── font
+│   │   ├── Times New Roman Bold Italic.ttf
+│   │   ├── Times New Roman Bold.ttf
+│   │   ├── Times New Roman Italic.ttf
+│   │   └── Times New Roman.ttf
 │   └── template.ipynb
 ├── out
 │   └── .gitkeep
-├── poetry.lock
-├── poetry.toml
 ├── pyproject.toml
+├── README.md
 ├── src
 │   ├── __init__.py
 │   ├── config
@@ -102,11 +105,13 @@ The main directories and files are as follows:
 │   │           └── __init__.py
 │   └── utils
 │       ├── __init__.py
-│       └── __pycache__
-│           └── __init__.cpython-39.pyc
-└── tests
-    ├── __init__.py
-    └── test_cuda.py
+│       ├── io_helper.py
+│       ├── metrics.py
+│       └── preprocessor.py
+├── tests
+│   ├── __init__.py
+│   └── test_cuda.py
+└── uv.lock
 ```
 </details>
 
